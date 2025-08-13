@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ON/OFF</title>
+  <style>
+    .button1{
+      background-color: rgb(25, 135, 84);
+      padding: 10px 18px;
+      border-radius: 10px;
+    }
+    .button2{
+      background-color: rgb(220,53,69);
+        padding: 10px 18px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="js-container"></div>
+
+  <!-- React + Babel + External Library (used by your course) -->
+  <script src="https://unpkg.com/supersimpledev/react.js"></script>
+  <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+  <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+  <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+  <!-- JSX Script -->
+   
+  <script type="text/babel">
+    function App(){
+      const[isButtonOn, setIsButtonOn] =React.useState(true);
+      function toggle(){
+        setIsButtonOn(!isButtonOn)
+      }
+
+      
+      return(
+        <>
+        <button className={isButtonOn?'button1':'button2'}
+        onClick={toggle}
+        >
+          {isButtonOn?'ON':'OFF'}
+        </button>
+        </>
+      )
+    }
+    const container = document.querySelector('.js-container')
+    const root = ReactDOM.createRoot(container)
+    
+    root.render(<App />)
+  
+
+    
+  </script>
+</body>
+</html>

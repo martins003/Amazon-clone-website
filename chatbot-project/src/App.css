@@ -1,0 +1,19 @@
+
+   
+    .app-container{
+      max-width: 600px;
+      margin: 20px auto;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      
+    }
+   
+
+    .prompt-message{
+      align-items: center;
+      justify-content: center;
+      margin-top: 75%;
+    }
+    
+    

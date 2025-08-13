@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div class="js-container"></div>
+
+
+  <script src="https://unpkg.com/supersimpledev/react.js"></script>
+  <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+  <script src="https://unpkg.com/supersimpledev/chatbot.js"></script>
+  <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+  <script type="text/babel">
+
+   
+
+    
+    
+
+     
+
+    function CountButton({count, setCount, buttonRef}){
+      
+      
+      function increaseCount (){
+           setCount(count+1)
+        }
+      return(
+
+        <button onClick={increaseCount}
+        ref={buttonRef}>
+          Clicked {count} {count === 1 ? 'time' : 'times'}
+        </button>
+        );
+      
+    }
+
+    function ResetBtn({setCount}){
+      const reset =()=>setCount(0);
+
+      return(
+        <>
+        <button onClick={reset}>Reset</button>
+        </>
+      )
+    }
+
+    function RenderAutoClick ({buttonElem, buttonRef}) {
+
+      
+      function autoClick(){
+        if(buttonElem){
+
+        }
+          setInterval(() =>{
+             
+            if(buttonElem){
+              buttonElem.click();
+            }
+          },1000)
+        
+      }
+      return(
+        <button  
+        onClick={autoClick}>
+        AutoClick</button>
+      )
+    }
+    function App (){
+        const buttonRef = React.useRef(null);
+      const buttonElem= buttonRef.current;
+      const [count, setCount] = React.useState(0);
+      return(
+        <>
+        <CountButton
+        count = {count}
+        setCount = {setCount}
+        buttonRef={buttonRef}
+        />
+        <CountButton
+        count = {count}
+        setCount = {setCount}
+        />
+        <ResetBtn 
+       setCount ={setCount}
+        />
+        <RenderAutoClick 
+          buttonElem={buttonElem}
+          buttonRef={buttonRef}
+        />
+        </>
+        )
+      }
+    
+
+        const container = document.querySelector('.js-container')
+    const root = ReactDOM.createRoot(container)
+    
+    root.render(<App />)
+  
+  </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>React Basis</title>
+</head>
+<body>
+  <div class="js-container"></div>
+
+  <!-- React + Babel + External Library (used by your course) -->
+  <script src="https://unpkg.com/supersimpledev/react.js"></script>
+  <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+  <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+  <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+  <!-- JSX Script -->
+   
+  <script type="text/babel">
+
+    const button = <button>hello</button>
+
+    const paragraph = <p>paragraph of text</p>
+      let socksCost = 10
+      let shirtCost = 8 ;
+       const productCost =shirtCost*2 + socksCost
+
+       let displayProductCost = <p>Product cost:{'$' + productCost}</p>
+       const shippingCost = 5;
+      const totalCost = productCost +shippingCost;
+
+       const div =(
+      <div>
+         <p>Product cost:{'$' + productCost}</p>
+        <p>shipping cost :{'$'+shippingCost}</p>
+        <p>total cost :{'$'+totalCost}</p>
+
+      </div>
+      );
+  
+        const date = dayjs().format('HH:mm:ss')
+    console.log(date)
+    let dateDisplay =<p>current time:{date}</p>
+    const container = document.querySelector('.js-container')
+    const root = ReactDOM.createRoot(container)
+    
+    root.render(dateDisplay)
+  
+
+    
+  </script>
+</body>
+</html>
