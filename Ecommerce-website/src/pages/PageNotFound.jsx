@@ -1,18 +1,13 @@
-import { Header } from "../components/Header"
-export function PageNotFound(){
+import { Header } from "../components/Header";
+import './pageNotFound.css';
+export function PageNotFound({cart }){
 
   return(
     <>
     <title>404-Page not found</title>
-      <Header />
-      <div  style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
-          fontSize: "2rem",
-          fontWeight: "bold",
-        }} >
+    <link rel="icon" type="image/svg+xml" href="home-favicon.png" />
+      <Header cart={cart}/>
+      <div className="not-found-message">
         PAGE NOT FOUND
       </div>
     </>
