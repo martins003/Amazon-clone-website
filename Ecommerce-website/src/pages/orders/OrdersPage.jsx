@@ -6,7 +6,7 @@ import { formatMoney } from '../../utils/money';
 import './OrdersPage.css';
 
 
-export function OrdersPage({ cart }) {
+export function OrdersPage({ cart,  loadCart }) {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
@@ -28,6 +28,7 @@ export function OrdersPage({ cart }) {
 
         <div className="orders-grid">
           {orders.map((order) => {
+
             return (
 
               <div key={order.id} className="order-container">
@@ -52,6 +53,15 @@ export function OrdersPage({ cart }) {
 
                 <div className="order-details-grid">
                   {order.products.map((orderProduct) => {
+
+                    const addToCart = async () => {
+                      await axios.post('/api/cart-items', {
+                        productId: orderProduct.product.id,
+                        quantity: 1
+                        //quantity: quantity
+                      });
+                      await loadCart();
+                    };
                     return (
                       <Fragment key={orderProduct.id}>
                         <div className="product-image-container">
@@ -70,7 +80,7 @@ export function OrdersPage({ cart }) {
                           </div>
                           <button className="buy-again-button button-primary">
                             <img className="buy-again-icon" src="images/icons/buy-again.png" />
-                            <span className="buy-again-message">Add to Cart</span>
+                            <span className="buy-again-message" onClick={addToCart}>Add to Cart</span>
                           </button>
                         </div>
 
