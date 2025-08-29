@@ -9,7 +9,7 @@ vi.mock('axios');
 describe('Product component', () => {
 
   let product;
-
+    let user;
   let loadCart;
 
   beforeEach(() => {
@@ -25,6 +25,8 @@ describe('Product component', () => {
       keywords: ["socks", "sports", "apparel"]
     };
     loadCart = vi.fn();
+
+     user = userEvent.setup();
   })
   // runs some code before each test so that one test does not affect the other
 
@@ -42,12 +44,12 @@ describe('Product component', () => {
     ).toBeInTheDocument();
 
     expect(
-      screen.getByTextid('product-image')
+      screen.getByTestId('product-image')
     ).toHaveAttribute('src', 'images/products/athletic-cotton-socks-6-pairs.jpg');
 
     expect(
-      screen.getByTextid('product-rating-stars-image')
-    ).toHaveAttribute('src', 'images/ratings/rating-${product.rating.stars * 10}.png');
+      screen.getByTestId('product-rating-stars-image')
+    ).toHaveAttribute('src', `images/ratings/rating-${product.rating.stars * 10}.png`);
 
     expect(
       screen.getByText('87')
@@ -60,16 +62,26 @@ describe('Product component', () => {
 
     render(<Product product={product} loadCart={loadCart} />);
 
-    const user = userEvent.setup();
-    const addToCartButton = screen.getByTestid('add-to-cart-button')
+    
+    const addToCartButton = screen.getByTestId('add-to-cart-button')
 
     await user.click(addToCartButton);
     // checks if our code ran axios.post and recieved the correct values
     expect(axios.post).toHaveBeenCalledWith('/api/cart-items', {
       productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
-      quantity: 1
+      quantity: 3
     }
     );
     expect(loadCart).toHaveBeenCalled();
-  })
+  });
+
+  it('selects a quantity', async () => {
+    render(<Product product={product} loadCart={loadCart} />);
+
+    const quantitySelector = screen.getByTestId('product-quantity-selector');
+    expect(quantitySelector).toHaveValue('1');
+    
+    await user.selectOptions(quantitySelector, '3');
+    expect(quantitySelector).toHaveValue('3');
+  });
 });
